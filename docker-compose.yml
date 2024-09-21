@@ -1,0 +1,20 @@
+services:
+  traefik:
+    container_name: traefik-service
+    image: traefik:latest
+    labels:
+      - "traefik.http.routers.traefik.rule=Host(`localhost`)"
+    restart: unless-stopped
+    ports:
+      - "80:80" # Exponer el puerto 8000
+      - "8080:8080" # Exponer la interfaz de administración
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./traefik/traefik.toml:/etc/traefik/traefik.toml
+      - ./traefik/log:/var/log
+    networks:
+      - internal-network
+
+networks:
+  internal-network:
+    external: true

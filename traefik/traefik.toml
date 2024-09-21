@@ -1,0 +1,14 @@
+[log]
+  level = "DEBUG"
+  filePath = "/var/log/traefik.log"
+
+[api]
+  insecure = true
+
+[providers]
+  [providers.docker] # "docker = true" es configurado por defecto al definir esta seccion  
+    exposedByDefault = false
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
